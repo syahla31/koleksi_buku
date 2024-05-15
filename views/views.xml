@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="koleksi_buku.list">
+      <field name="name">koleksi_buku list</field>
+      <field name="model">koleksi_buku.koleksi_buku</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="koleksi_buku.action_window">
+      <field name="name">koleksi_buku window</field>
+      <field name="res_model">koleksi_buku.koleksi_buku</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="koleksi_buku.action_server">
+      <field name="name">koleksi_buku server</field>
+      <field name="model_id" ref="model_koleksi_buku_koleksi_buku"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="koleksi_buku" id="koleksi_buku.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="koleksi_buku.menu_1" parent="koleksi_buku.menu_root"/>
+    <menuitem name="Menu 2" id="koleksi_buku.menu_2" parent="koleksi_buku.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="koleksi_buku.menu_1_list" parent="koleksi_buku.menu_1"
+              action="koleksi_buku.action_window"/>
+    <menuitem name="Server to list" id="koleksi_buku" parent="koleksi_buku.menu_2"
+              action="koleksi_buku.action_server"/>
+-->
+  </data>
+</odoo>

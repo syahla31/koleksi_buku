@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tampilan Tree -->
+        <record id="view_member_tree" model="ir.ui.view">
+            <field name="name">perpus.member.tree</field>
+            <field name="model">perpus.member</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="no_identitas"/>
+                    <field name="jenis_identitas"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Tampilan Form -->
+        <record id="view_member_form" model="ir.ui.view">
+            <field name="name">perpus.member.form</field>
+            <field name="model">perpus.member</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_send_approval" type="object" string="Send for Approval" states="draft" class="btn-primary"/>
+                        <button name="action_approve" type="object" string="Approve" states="waiting_approval" class="btn-primary" groups="kelola_buku.manager_member"/>
+                        <button name="action_reject" type="object" string="Reject" states="waiting_approval" class="btn-primary" groups="kelola_buku.manager_member"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval,approved,rejected"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="no_identitas"/>
+                            <field name="jenis_identitas"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action Window -->
+        <record id="action_master_member" model="ir.actions.act_window">
+            <field name="name">Master Member</field>
+            <field name="res_model">perpus.member</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_manajemenbuku_rental_tree" model="ir.ui.view">
+            <field name="name">perpus.manajemenbuku.tree</field>
+            <field name="model">perpus.manajemenbuku</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="serial_number"/>
+                    <field name="lokasi_rak"/>
+                    <field name="qty_tersedia"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_manajemenbuku_rental_form" model="ir.ui.view">
+            <field name="name">perpus.manajemenbuku.form</field>
+            <field name="model">perpus.manajemenbuku</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="serial_number"/>
+                            <field name="lokasi_rak"/>
+                            <field name="qty_tersedia"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_manajemenbuku" model="ir.actions.act_window">
+            <field name="name">Manajemen Buku</field>
+            <field name="res_model">perpus.manajemenbuku</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

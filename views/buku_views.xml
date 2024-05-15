@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_buku_tree" model="ir.ui.view">
+            <field name="name">perpustakaan.buku.tree</field>
+            <field name="model">perpus.buku</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="action_view_peminjaman" type="object" string="Peminjaman" class="oe_highlight"/>
+                        <button name="action_view_buku_penulis" type="object" string="Buku Penulis" class="oe_highlight"/>
+                    </header>
+                    <field name="name"/>
+                    <field name="kategori"/>
+                    <field name="tgl_terbit"/>
+                    <field name="penulis" widget="many2many_tags"/>
+                    <field name="kode"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_buku_form" model="ir.ui.view">
+            <field name="name">perpustakaan.buku.form</field>
+            <field name="model">perpus.buku</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div name="button_box" position="inside">
+                            <button name="action_view_peminjaman" type="object" class="oe_stat_button" icon="fa-book">
+                                <field name="peminjaman_ids" widget="statinfo" string="Peminjaman"/>
+                            </button>
+                            <button name="action_view_buku_penulis" type="object" class="oe_stat_button" icon="fa-book">
+                                <field name="buku_penulis_ids" widget="statinfo" string="Buku Penulis"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="kategori"/>
+                            <field name="tgl_terbit"/>
+                            <field name="penulis" widget="many2many_tags"/>
+                            <field name="kode"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_buku_search" model="ir.ui.view">
+            <field name="name">perpustakaan.buku.search</field>
+            <field name="model">perpus.buku</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="kategori"/>
+                    <filter name="filter_tanggal_terbit" string="Tanggal Terbit" date="tgl_terbit"/>
+                    <filter name="filter_kategori" string="Kategori" context="{'group_by': 'kategori'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_master_buku" model="ir.actions.act_window">
+            <field name="name">Master Buku</field>
+            <field name="res_model">perpus.buku</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_buku_search"/>
+        </record>
+
+        <menuitem id="menu_perpustakaan_root" name="Perpustakaan"/>
+        
+        <menuitem id="menu_master_buku" name="Master Buku" parent="menu_perpustakaan_root" action="action_master_buku"/>
+        <menuitem id="menu_master_member" name="Master Member" parent="menu_perpustakaan_root" action="action_master_member"/>
+        <menuitem id="menu_transaksi_rental" name="Transaksi Rental" parent="menu_perpustakaan_root" action="action_transaksi_rental"/>
+        <menuitem id="menu_manajemen_rental" name="Manajemen Buku" parent="menu_perpustakaan_root" action="action_manajemenbuku"/>
+    </data>
+</odoo>

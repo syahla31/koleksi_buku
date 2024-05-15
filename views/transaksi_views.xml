@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_transaksi_rental_tree" model="ir.ui.view">
+            <field name="name">perpus.transaksi.tree</field>
+            <field name="model">perpus.transaksi</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tanggal_rental"/>
+                    <field name="peminjam_id"/>
+                    <field name="buku_ids"/>
+                    <field name="tanggal_pinjam"/>
+                    <field name="tanggal_kembali"/>
+                    <field name="jumlah_hari" />
+                    <field name="total_biaya"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_transaksi_rental_form" model="ir.ui.view">
+            <field name="name">perpus.transaksi.form</field>
+            <field name="model">perpus.transaksi</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="tanggal_rental"/>
+                            <field name="peminjam_id"/>
+                            <field name="buku_ids"/>
+                            <field name="tanggal_pinjam"/>
+                            <field name="tanggal_kembali"/>
+                            <field name="jumlah_hari" />
+                            <field name="total_biaya"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_transaksi_rental" model="ir.actions.act_window">
+            <field name="name">Transaksi Rental</field>
+            <field name="res_model">perpus.transaksi</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
