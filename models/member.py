@@ -11,7 +11,7 @@ class Member(models.Model):
     jenis_identitas = fields.Selection([
         ('ktp', 'KTP'),
         ('sim', 'SIM'),
-        ('other', 'Lainnya')
+        ('passport', 'Pasport')
     ], string='Jenis Identitas', default='ktp')
     state = fields.Selection([
         ('draft', 'Draft'),

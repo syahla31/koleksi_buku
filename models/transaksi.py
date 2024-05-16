@@ -6,7 +6,11 @@ class transaksi(models.Model):
     _description = 'Model Transaksi Rental'
 
     tanggal_rental = fields.Date(string='Tanggal Rental', default=fields.Date.context_today)
-    peminjam_id = fields.Many2one('perpus.member', string='Nama Peminjam', required=True)
+    peminjam_id = fields.Many2one(
+        'perpus.member', 
+        string='Nama Peminjam',
+        domain=[('state','=', 'approved')], 
+        required=True)
     buku_ids = fields.Many2many('perpus.buku', string='Buku', required=True)
     tanggal_pinjam = fields.Date(string='Tanggal Pinjam', required=True)
     tanggal_kembali = fields.Date(string='Tanggal Kembali',required=True)

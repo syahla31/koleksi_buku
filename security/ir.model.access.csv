@@ -1,5 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_all_perpus_buku,all_perpus_buku,model_perpus_buku,,1,1,1,1
-access_all_perpus_member,all_perpus_member,model_perpus_member,,1,1,1,1
+access_all_perpus_member,all_perpus_member,model_perpus_member,koleksi_buku.perpus_member_access,1,1,1,1
 access_all_perpus_transaksi,all_perpus_transaksi,model_perpus_transaksi,,1,1,1,1
 access_all_perpus_manajemen,all_perpus_manajemen,model_perpus_manajemenbuku,,1,1,1,1
+access_all_perpus_managermember,all_perpus_managermember,model_perpus_member,koleksi_buku.perpus_manager_access,1,0,0,0

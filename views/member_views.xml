@@ -23,8 +23,8 @@
                 <form>
                     <header>
                         <button name="action_send_approval" type="object" string="Send for Approval" states="draft" class="btn-primary"/>
-                        <button name="action_approve" type="object" string="Approve" states="waiting_approval" class="btn-primary" groups="kelola_buku.manager_member"/>
-                        <button name="action_reject" type="object" string="Reject" states="waiting_approval" class="btn-primary" groups="kelola_buku.manager_member"/>
+                        <button name="action_approve" type="object" string="Approve" states="waiting_approval" class="btn-primary" groups="koleksi_buku.perpus_manager_access"/>
+                        <button name="action_reject" type="object" string="Reject" states="waiting_approval" class="btn-primary" groups="koleksi_buku.perpus_manager_access"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval,approved,rejected"/>
                     </header>
                     <sheet>

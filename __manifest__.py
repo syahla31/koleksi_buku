@@ -31,7 +31,8 @@
         'views/transaksi_views.xml',
         'views/manajemen_views.xml',
         'views/buku_views.xml',
-        # 'views/partner_views.xml',
+        'security/security.xml',
+        'views/menu_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
