@@ -36,13 +36,21 @@ class buku(models.Model):
             'type': 'ir.actions.act_window',
             'target': 'current',
         }
+        
     def action_view_peminjaman(self):
+        transaksi_ids = self.env['perpus.transaksi'].search([('buku_ids', 'in', self.ids)])
+        unique_judul_buku = transaksi_ids.mapped('buku_ids.name')
+        domain = [('buku_ids.name', 'in', unique_judul_buku)]
+
+        def _name_create(name, context):
+            judul_buku = ', '.join(unique_judul_buku)
+            return _('Peminjaman Buku: %s') % judul_buku
+
         return {
-            'name': _('Peminjaman Buku'),
+            'name': _name_create('Peminjaman Buku', self._context),
             'view_mode': 'tree,form',
             'res_model': 'perpus.transaksi',
-            'domain': [('buku_ids', '=', self.id)],
+            'domain': domain,
             'type': 'ir.actions.act_window',
             'target': 'current',
         }
-    
