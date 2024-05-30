@@ -11,7 +11,11 @@ class transaksi(models.Model):
         string='Nama Peminjam',
         domain=[('state','=', 'approved')], 
         required=True)
-    buku_ids = fields.Many2many('perpus.buku', string='Buku', required=True)
+    buku_ids = fields.Many2many(
+        'perpus.buku', 
+        string='Buku', 
+        domain=[('manajemenbuku_id.qty_tersedia', '>', 0)],
+        required=True)
     tanggal_pinjam = fields.Date(string='Tanggal Pinjam', required=True)
     tanggal_kembali = fields.Date(string='Tanggal Kembali',required=True)
     total_biaya = fields.Float(string='Total Biaya', compute='_compute_total_biaya')
@@ -30,3 +34,32 @@ class transaksi(models.Model):
     def _compute_total_biaya(self):
         for record in self:
             record.total_biaya = record.jumlah_hari * 1000
+            
+    @api.model
+    def create(self, vals):
+        res = super(transaksi, self).create(vals)
+        if 'buku_ids' in vals:
+            for buku in res.buku_ids:
+                manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku.id)], limit=1)
+                if manajemen_buku and manajemen_buku.qty_tersedia > 0:
+                    manajemen_buku.qty_tersedia -= 1
+                else:
+                    raise ValueError(_('Buku %s tidak tersedia untuk dipinjam.') % buku.name)
+        return res
+
+    def write(self, vals):
+        res = super(transaksi, self).write(vals)
+        if 'tanggal_kembali' in vals:
+            for buku in self.buku_ids:
+                manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku.id)], limit=1)
+                if manajemen_buku:
+                    manajemen_buku.qty_tersedia += 1
+        return res
+
+    def unlink(self):
+        for record in self:
+            for buku in record.buku_ids:
+                manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku.id)], limit=1)
+                if manajemen_buku:
+                    manajemen_buku.qty_tersedia += 1
+        return super(transaksi, self).unlink()

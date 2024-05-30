@@ -29,4 +29,11 @@
         action="action_transaksi_rental"
         groups="koleksi_buku.perpus_transaksi_access"
         sequence="3"/>
+
+    <menuitem
+        id="menu_manajemen_buku"
+        name="Manajemen Buku"
+        action="action_manajemenbuku"
+        parent="menu_perpustakaan_root"
+        sequence="4"/>
 </odoo>

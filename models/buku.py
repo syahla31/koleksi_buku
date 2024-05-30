@@ -15,7 +15,7 @@ class buku(models.Model):
     tgl_terbit = fields.Date(string='Tangal Terbit', required=True)
     penulis = fields.Many2many(comodel_name='res.partner', string='Penulis Buku', required=True)
     kode = fields.Char(string='Kode ISBN', required=True)
-    
+    manajemenbuku_id = fields.One2many('perpus.manajemenbuku', 'name', string='Manajemen Buku')
     peminjaman_ids = fields.One2many('perpus.transaksi', 'buku_ids', string='Peminjaman')
     buku_penulis_ids = fields.Many2many('perpus.buku', string='Buku Penulis', compute='_compute_buku_penulis_ids')
 
