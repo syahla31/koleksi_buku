@@ -25,8 +25,8 @@
                             <field name="name"/>
                             <field name="serial_number"/>
                             <!-- <field name="lokasi_rak"/> -->
-                            <!-- <field name="qty_tersedia"/> -->
-                            <field name="stok" />
+                            <field name="qty_tersedia"/>
+                            <!-- <field name="stok" /> -->
                         </group>
                     </sheet>
                 </form>

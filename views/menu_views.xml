@@ -19,7 +19,7 @@
         name="Master Member" 
         parent="menu_perpustakaan_root" 
         action="action_master_member"
-        groups="koleksi_buku.perpus_member_access"
+        groups="koleksi_buku.perpus_member_access,koleksi_buku.perpus_manager_access"
         sequence="2"/>
 
     <menuitem 

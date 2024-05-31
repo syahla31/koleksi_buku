@@ -8,7 +8,7 @@
                 <tree>
                     <field name="tanggal_rental"/>
                     <field name="peminjam_id"/>
-                    <field name="buku_ids"/>
+                    <field name="buku_names" string="Judul Buku"/>
                     <field name="tanggal_pinjam"/>
                     <field name="tanggal_kembali"/>
                     <field name="jumlah_hari" />

@@ -3,7 +3,7 @@ access_all_perpus_buku,all_perpus_buku,model_perpus_buku,koleksi_buku.perpus_buk
 access_all_perpus_member,all_perpus_member,model_perpus_member,koleksi_buku.perpus_member_access,1,1,1,1
 access_all_perpus_transaksi,all_perpus_transaksi,model_perpus_transaksi,koleksi_buku.perpus_transaksi_access,1,1,1,1
 access_all_perpus_manajemen,all_perpus_manajemen,model_perpus_manajemenbuku,,1,1,1,1
-access_all_perpus_managermember,all_perpus_managermember,model_perpus_member,koleksi_buku.perpus_manager_access,1,1,0,0
+access_all_perpus_manager,all_perpus_manager,model_perpus_member,koleksi_buku.perpus_manager_access,1,1,0,0
 access_all_perpus_bukuu,all_perpus_bukuu,model_perpus_transaksi,koleksi_buku.perpus_admin_access,1,1,0,0
 access_all_perpus_bukuuu,all_perpus_bukuuu,model_perpus_buku,koleksi_buku.perpus_admin_access,1,1,0,0
 access_all_perpus_members,all_perpus_members,model_perpus_member,koleksi_buku.perpus_admin_access,1,1,0,0

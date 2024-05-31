@@ -1,16 +1,21 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api
 
 class ManajemenBuku(models.Model):
     _name = 'perpus.manajemenbuku'
     _description = 'Model Manajemen Buku'
 
-    name = fields.Many2one('perpus.buku', string='Buku', required=True)
+    name = fields.Many2one('perpus.buku', string='Buku', required=True, domain=lambda self: self._get_buku_domain())
     serial_number = fields.Char(string='Serial Number', required=True)
-    # lokasi_rak = fields.Char(string='Lokasi Rak', required=True)
     qty_tersedia = fields.Integer(string='Qty Tersedia', default=1)
-    stok = fields.Integer(string='Stok Buku Awal')
-    
-    #qty bersedia akan mengurang setiap ada peminjaman buku dan pengurangan dari stok buku awal. dan jika qty tersedia 0 maka buku tidak dapat dipinjam.
-    
-    
-    
+
+    @api.model
+    def _get_buku_domain(self):
+        # Mendapatkan daftar ID buku yang sudah terdaftar di Manajemen Buku
+        manajemen_buku_ids = self.search([]).mapped('name.id')
+        # Mengembalikan domain untuk field 'name'
+        return [('id', 'not in', manajemen_buku_ids)]
+
+    # @api.onchange('name')
+    # def _onchange_name(self):
+    #     if self.name:
+    #         self.serial_number = self.name.serial_number
