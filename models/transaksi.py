@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta
 from odoo.exceptions import ValidationError
 from datetime import date
 
-class transaksi(models.Model):
+class Transaksi(models.Model):
     _name = 'perpus.transaksi'
     _description = 'Model Transaksi Rental'
 
@@ -11,7 +11,7 @@ class transaksi(models.Model):
     peminjam_id = fields.Many2one(
         'perpus.member', 
         string='Nama Peminjam',
-        domain=[('state','=', 'approved')], 
+        domain=[('state', '=', 'approved')], 
         required=True)
     buku_ids = fields.Many2many(
         'perpus.buku', 
@@ -19,7 +19,7 @@ class transaksi(models.Model):
         domain=[('manajemenbuku_id.qty_tersedia', '>', 0)],
         required=True)
     tanggal_pinjam = fields.Date(string='Tanggal Pinjam', required=True)
-    tanggal_kembali = fields.Date(string='Tanggal Kembali',required=True)
+    tanggal_kembali = fields.Date(string='Tanggal Kembali', required=True)
     total_biaya = fields.Float(string='Total Biaya', compute='_compute_total_biaya')
     jumlah_hari = fields.Integer(string='Durasi Peminjaman', compute='_compute_jumlah_hari')
     buku_names = fields.Char(string='Judul Buku', compute='_compute_buku_names')
@@ -72,42 +72,36 @@ class transaksi(models.Model):
     
     @api.model
     def create(self, vals):
-        res = super(transaksi, self).create(vals)
+        res = super(Transaksi, self).create(vals)
         if 'buku_ids' in vals:
             for buku in res.buku_ids:
                 manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku.id)], limit=1)
                 if manajemen_buku and manajemen_buku.qty_tersedia > 0:
                     manajemen_buku.qty_tersedia -= 1
                 else:
-                    raise ValueError(_('Buku %s tidak tersedia untuk dipinjam.') % buku.name)
+                    raise ValidationError('Buku %s tidak tersedia untuk dipinjam.' % buku.name)
         return res
 
     def write(self, vals):
         for record in self:
-            # Simpan buku_ids asli sebelum pembaruan
             original_buku_ids = set(record.buku_ids.ids)
-            super(transaksi, record).write(vals)
-            # Dapatkan buku_ids setelah pembaruan
+            super(Transaksi, record).write(vals)
             updated_buku_ids = set(record.buku_ids.ids)
 
-            # Buku yang dihapus dari transaksi
             removed_buku_ids = original_buku_ids - updated_buku_ids
-            # Buku yang ditambahkan ke transaksi
             added_buku_ids = updated_buku_ids - original_buku_ids
 
-            # Menambah stok buku yang dihapus dari transaksi
             for buku_id in removed_buku_ids:
                 manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku_id)], limit=1)
                 if manajemen_buku:
                     manajemen_buku.qty_tersedia += 1
 
-            # Mengurangi stok buku yang ditambahkan ke transaksi
             for buku_id in added_buku_ids:
                 manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku_id)], limit=1)
                 if manajemen_buku and manajemen_buku.qty_tersedia > 0:
                     manajemen_buku.qty_tersedia -= 1
                 else:
-                    raise ValueError(_('Buku %s tidak tersedia untuk dipinjam.') % manajemen_buku.name)
+                    raise ValidationError('Buku %s tidak tersedia untuk dipinjam.' % manajemen_buku.name)
 
         return True
     
@@ -117,4 +111,4 @@ class transaksi(models.Model):
                 manajemen_buku = self.env['perpus.manajemenbuku'].search([('name', '=', buku.id)], limit=1)
                 if manajemen_buku:
                     manajemen_buku.qty_tersedia += 1
-        return super(transaksi, self).unlink()
+        return super(Transaksi, self).unlink()

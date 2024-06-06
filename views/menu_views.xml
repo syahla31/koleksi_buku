@@ -35,5 +35,6 @@
         name="Manajemen Buku"
         action="action_manajemenbuku"
         parent="menu_perpustakaan_root"
+        groups="koleksi_buku.perpus_buku_access"
         sequence="4"/>
 </odoo>
