@@ -18,6 +18,7 @@ class buku(models.Model):
     manajemenbuku_id = fields.One2many('perpus.manajemenbuku', 'name', string='Manajemen Buku')
     peminjaman_ids = fields.One2many('perpus.transaksi', 'buku_ids', string='Peminjaman')
     buku_penulis_ids = fields.Many2many('perpus.buku', string='Buku Penulis', compute='_compute_buku_penulis_ids')
+    # Cobaa
 
     @api.depends('penulis')
     def _compute_buku_penulis_ids(self):
