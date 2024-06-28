@@ -31,6 +31,8 @@
         'views/transaksi_views.xml',
         'views/manajemen_views.xml',
         'views/buku_views.xml',
+        'wizard/report_wizard.xml',
+        'views/details_report.xml',
         'security/security.xml',
         'views/menu_views.xml',
     ],

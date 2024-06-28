@@ -26,9 +26,16 @@
         id="menu_transaksi_rental" 
         name="Transaksi Rental" 
         parent="menu_perpustakaan_root" 
-        action="action_transaksi_rental"
         groups="koleksi_buku.perpus_transaksi_access"
         sequence="3"/>
+
+    <menuitem 
+        id="menu_transaksi" 
+        name="Transaksi Rental" 
+        parent="menu_transaksi_rental" 
+        action="action_transaksi_rental"
+        groups="koleksi_buku.perpus_transaksi_access"
+        sequence="4"/>
 
     <menuitem
         id="menu_manajemen_buku"
@@ -36,5 +43,12 @@
         action="action_manajemenbuku"
         parent="menu_perpustakaan_root"
         groups="koleksi_buku.perpus_buku_access"
-        sequence="4"/>
+        sequence="6"/>
+
+    <menuitem
+        id="menu_wizard_report"
+        name="Report Transaksi"
+        action="action_report_wizard"
+        parent="menu_transaksi_rental"
+        sequence="5"/>    
 </odoo>

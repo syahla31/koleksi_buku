@@ -7,3 +7,4 @@ access_all_perpus_manager,all_perpus_manager,model_perpus_member,koleksi_buku.pe
 access_all_perpus_bukuu,all_perpus_bukuu,model_perpus_transaksi,koleksi_buku.perpus_admin_access,1,1,0,0
 access_all_perpus_bukuuu,all_perpus_bukuuu,model_perpus_buku,koleksi_buku.perpus_admin_access,1,1,0,0
 access_all_perpus_members,all_perpus_members,model_perpus_member,koleksi_buku.perpus_admin_access,1,1,0,0
+access_all_perpus_report,all_perpus_report,model_wizard_report,koleksi_buku.perpus_transaksi_access,1,1,1,1

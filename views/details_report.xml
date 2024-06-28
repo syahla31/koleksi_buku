@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Template Body Session -->
+        <template id="body_rental_transactions">
+            <div class="page">
+                <div class="d-flex justify-content-center align-items-center" style="height: 80px;">
+                    <div style="text-align: center; width: 100%;">
+                        <h2 style="align-top:-50; font-size: 36px;">LAPORAN TRANSAKSI RENTAL BUKU</h2>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div style="width: 100%;">
+                        <group string="Report Details">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <!-- <td style="width: 25%; background-color: #EB5679; padding: 5px; color: white; font-weight: bold;">Show All Date</td>
+                                        <td style="width: 75%; padding: 5px;"><t t-esc="o.show_all_date" /></td> -->
+                                    </tr>
+                                    <tr t-if="not o.show_all_date">
+                                        <td style="width: 25%; background-color: #EB5679; padding: 5px; color: white; font-weight: bold;">Dari Tanggal</td>
+                                        <td style="width: 75%; padding: 5px;"><t t-esc="o.start_date" /></td>
+                                    </tr>
+                                    <tr t-if="not o.show_all_date">
+                                        <td style="width: 25%; background-color: #EB5679; padding: 5px; color: white; font-weight: bold;">Sampe Tanggal</td>
+                                        <td style="width: 75%; padding: 5px;"><t t-esc="o.end_date" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </group>
+                    </div>
+                </div>
+                <div style="margin-left: auto; margin-right: auto;">
+                    <table class="table table-bordered mt-4" style="width:100%">
+                        <thead style="background-color:#EB5679;color:white;font-weight: bold;">
+                            <tr>
+                                <td class="text-center">Tanggal Rental</td>
+                                <td class="text-center">Nama Peminjam</td>
+                                <td class="text-center">Judul Buku</td>
+                                <td class="text-center">Durasi Peminjaman</td>
+                                <td class="text-center">Total Biaya</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.get_transactions()" t-as="transaction">
+                                <tr>
+                                    <td><t t-esc="transaction.tanggal_rental" /></td>
+                                    <td><t t-esc="transaction.peminjam_id.name" /></td>
+                                    <td><t t-esc="transaction.buku_ids.name" /></td>
+                                    <td><t t-esc="transaction.jumlah_hari" /> Hari</td>
+                                    <td><t t-esc="transaction.total_biaya" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+
+        <!-- Template Report Rental Transactions -->
+        <template id="report_rental_transactions">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div t-if="report_type == 'html'">
+                        <div>
+                            <t t-call="koleksi_buku.body_rental_transactions" />
+                        </div>
+                    </div>
+                    <div t-else="">
+                        <t t-call="web.external_layout">
+                            <t t-call="koleksi_buku.body_rental_transactions" />
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
